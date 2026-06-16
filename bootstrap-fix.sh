@@ -49,15 +49,18 @@ main() {
 
   sync_repo
 
-  chmod +x fix-dns.sh fix-cert.sh deploy-ssl.sh sync-site.sh fix-all.sh bootstrap-fix.sh fix-delegation.sh 2>/dev/null || true
+  chmod +x fix-dns.sh fix-cert.sh deploy-ssl.sh sync-site.sh fix-all.sh bootstrap-fix.sh fix-delegation.sh step1-setup-nameservers.sh 2>/dev/null || true
 
-  log "Step 1/3: DNS delegation check"
+  log "Step 1/4: Nameserver setup (server + registrar instructions)"
+  ./step1-setup-nameservers.sh || log "Nameserver setup reported issues"
+
+  log "Step 2/4: DNS delegation check"
   ./fix-delegation.sh || log "Delegation still needs registrar update"
 
-  log "Step 2/3: DNS records on Hestia"
-  ./fix-dns.sh || log "DNS step reported issues; continuing to SSL step"
+  log "Step 3/4: DNS records on Hestia"
+  ./fix-dns.sh || log "DNS step reported issues; continuing"
 
-  log "Step 3/3: SSL"
+  log "Step 4/4: SSL"
   ./fix-cert.sh --email "$CERTBOT_EMAIL"
 
   log "Finished. Open https://card3.cyber-beast.tech"
