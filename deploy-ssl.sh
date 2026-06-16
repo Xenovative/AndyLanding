@@ -33,6 +33,17 @@ ensure_command_exists() {
   fi
 }
 
+reload_or_start_nginx() {
+  if systemctl is-active --quiet nginx; then
+    sudo systemctl reload nginx
+    return
+  fi
+
+  printf 'Nginx is not running. Starting nginx...\n'
+  sudo systemctl start nginx
+  sudo systemctl enable nginx
+}
+
 write_nginx_http_config() {
   cat <<EOF
 server {
@@ -168,7 +179,7 @@ main() {
   sudo install -m 0644 "$temp_nginx_config" "$NGINX_AVAILABLE"
   sudo ln -sf "$NGINX_AVAILABLE" "$NGINX_ENABLED"
   sudo nginx -t
-  sudo systemctl reload nginx
+  reload_or_start_nginx
 
   if [[ ! -f "/etc/letsencrypt/live/${SITE_DOMAIN}/fullchain.pem" || ! -f "/etc/letsencrypt/live/${SITE_DOMAIN}/privkey.pem" ]]; then
     certbot_args=(
@@ -191,7 +202,7 @@ main() {
     write_nginx_https_config > "$temp_nginx_config"
     sudo install -m 0644 "$temp_nginx_config" "$NGINX_AVAILABLE"
     sudo nginx -t
-    sudo systemctl reload nginx
+    reload_or_start_nginx
   fi
 
   rm -f "$temp_nginx_config"
