@@ -3,3 +3,15 @@
 README.md
 node_modules
 npm-debug.log
+AndyLanding/
+deploy-*.sh
+fix-*.sh
+bootstrap-fix.sh
+step1-setup-nameservers.sh
+sync-site.sh
+docker-compose*.yml
+Dockerfile
+.dockerignore
+certbot/
+nginx.generated.conf
+CNAME
