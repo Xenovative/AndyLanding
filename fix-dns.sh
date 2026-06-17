@@ -7,8 +7,7 @@ set -euo pipefail
 PARENT_DOMAIN="cyber-beast.tech"
 SITE_DOMAIN="card3.cyber-beast.tech"
 RECORD_NAME="card3"
-VPS_IPV4="${VPS_IPV4:-89.116.111.157}"
-VPS_IPV6="${VPS_IPV6:-2a02:4780:28:84a4::1}"
+VPS_IPV4="${VPS_IPV4:-76.13.248.127}"
 HESTIA_BIN="/usr/local/hestia/bin"
 
 log() { printf '[fix-dns] %s\n' "$1"; }
@@ -67,9 +66,6 @@ add_card3_records() {
 
   log "Adding A     ${RECORD_NAME}.${PARENT_DOMAIN} -> ${VPS_IPV4}"
   "$HESTIA_BIN/v-add-dns-record" "$hestia_user" "$PARENT_DOMAIN" "$RECORD_NAME" A "$VPS_IPV4"
-
-  log "Adding AAAA  ${RECORD_NAME}.${PARENT_DOMAIN} -> ${VPS_IPV6}"
-  "$HESTIA_BIN/v-add-dns-record" "$hestia_user" "$PARENT_DOMAIN" "$RECORD_NAME" AAAA "$VPS_IPV6"
 }
 
 show_records() {
@@ -96,7 +92,6 @@ verify_public_dns() {
   log "Public DNS is not updated yet."
   log "If this stays empty, update DNS at your domain registrar for zone: ${PARENT_DOMAIN}"
   log "Add record: ${RECORD_NAME}  A  ${VPS_IPV4}"
-  log "Add record: ${RECORD_NAME}  AAAA  ${VPS_IPV6}"
   return 1
 }
 

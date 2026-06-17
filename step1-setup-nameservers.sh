@@ -10,8 +10,7 @@ set -euo pipefail
 PARENT_DOMAIN="cyber-beast.tech"
 SITE_DOMAIN="card3.cyber-beast.tech"
 RECORD_NAME="card3"
-VPS_IPV4="${VPS_IPV4:-89.116.111.157}"
-VPS_IPV6="${VPS_IPV6:-2a02:4780:28:84a4::1}"
+VPS_IPV4="${VPS_IPV4:-76.13.248.127}"
 HESTIA_BIN="/usr/local/hestia/bin"
 HESTIA_CONF="/usr/local/hestia/conf/hestia.conf"
 
@@ -138,7 +137,6 @@ ensure_required_records() {
   fi
 
   upsert_a_record "$hestia_user" "$RECORD_NAME" "$VPS_IPV4"
-  upsert_aaaa_record "$hestia_user" "$RECORD_NAME" "$VPS_IPV6"
 
   # Apex/root record helps some setups
   upsert_a_record "$hestia_user" "@" "$VPS_IPV4" || true

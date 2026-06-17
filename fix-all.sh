@@ -6,8 +6,7 @@ SITE_DOMAIN="card3.cyber-beast.tech"
 WRONG_DOMAIN="card3.cyber.beast.tech"
 PARENT_DOMAIN="cyber-beast.tech"
 RECORD_NAME="card3"
-VPS_IPV4="${VPS_IPV4:-89.116.111.157}"
-VPS_IPV6="${VPS_IPV6:-2a02:4780:28:84a4::1}"
+VPS_IPV4="${VPS_IPV4:-76.13.248.127}"
 CERTBOT_EMAIL="${CERTBOT_EMAIL:-admin@cyber-beast.tech}"
 HESTIA_BIN="/usr/local/hestia/bin"
 
@@ -55,9 +54,6 @@ fix_hestia_dns() {
 
   log "Adding A record ${RECORD_NAME} -> ${VPS_IPV4}"
   "$HESTIA_BIN/v-add-dns-record" "$hestia_user" "$PARENT_DOMAIN" "$RECORD_NAME" A "$VPS_IPV4"
-
-  log "Adding AAAA record ${RECORD_NAME} -> ${VPS_IPV6}"
-  "$HESTIA_BIN/v-add-dns-record" "$hestia_user" "$PARENT_DOMAIN" "$RECORD_NAME" AAAA "$VPS_IPV6"
 }
 
 cleanup_wrong_nginx_configs() {

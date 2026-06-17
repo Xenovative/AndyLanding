@@ -7,8 +7,7 @@ set -euo pipefail
 PARENT_DOMAIN="cyber-beast.tech"
 SITE_DOMAIN="card3.cyber-beast.tech"
 RECORD_NAME="card3"
-VPS_IPV4="${VPS_IPV4:-89.116.111.157}"
-VPS_IPV6="${VPS_IPV6:-2a02:4780:28:84a4::1}"
+VPS_IPV4="${VPS_IPV4:-76.13.248.127}"
 HESTIA_BIN="/usr/local/hestia/bin"
 HESTIA_CONF="/usr/local/hestia/conf/hestia.conf"
 
@@ -119,7 +118,6 @@ EOF
   3) After NS propagation, this zone on the VPS must contain:
 
      ${RECORD_NAME}.${PARENT_DOMAIN}   A      ${VPS_IPV4}
-     ${RECORD_NAME}.${PARENT_DOMAIN}   AAAA   ${VPS_IPV6}
 
   4) Verify (repeat until correct):
 
