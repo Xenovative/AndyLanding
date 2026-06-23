@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# One-shot deploy for all three Xenovative namecards on the cyber-beast.tech VPS.
+# One-shot deploy for Xenovative namecards on cyber-beast.tech VPS.
 # Run from Hostinger Browser Terminal (hPanel -> VPS -> Terminal) as root.
 #
 # Live URLs after success:
 #   https://card1.cyber-beast.tech      Stefano Qiu
 #   https://card3.cyber-beast.tech      Andy / Golden Throne
+#   https://card5.cyber-beast.tech      Dr. Zulkifli Hasan
 #   https://director.cyber-beast.tech   CBT / Ansgar Yeung
 
 CERTBOT_EMAIL="${CERTBOT_EMAIL:-admin@cyber-beast.tech}"
@@ -48,9 +49,7 @@ chmod_scripts() {
     "${dir}/deploy-ssl.sh" \
     "${dir}/sync-site.sh" \
     "${dir}/fix-dns.sh" \
-    "${dir}/deploy-docker.sh" \
-    "${dir}/bootstrap-fix.sh" \
-    "${dir}/fix-all.sh" \
+    "${dir}/fix-nginx-default.sh" \
     2>/dev/null || true
 }
 
@@ -85,10 +84,12 @@ main() {
   sync_repo "AndyLanding" "master"
   sync_repo "CBTNamecard" "main"
   sync_repo "StephenNameCard" "main"
+  sync_repo "dr-zulkifli-namecard" "master"
 
   chmod_scripts "$HOME/AndyLanding"
   chmod_scripts "$HOME/CBTNamecard"
   chmod_scripts "$HOME/StephenNameCard/Stephen"
+  chmod_scripts "$HOME/dr-zulkifli-namecard"
 
   log "Deploying Stefano Qiu -> card1.cyber-beast.tech"
   if [[ -x "$HOME/StephenNameCard/Stephen/fix-dns.sh" ]]; then
@@ -102,13 +103,25 @@ main() {
   fi
   "$HOME/AndyLanding/deploy-ssl.sh" --email "$CERTBOT_EMAIL"
 
+  log "Deploying Dr. Zulkifli -> card5.cyber-beast.tech"
+  if [[ -x "$HOME/dr-zulkifli-namecard/fix-dns.sh" ]]; then
+    "$HOME/dr-zulkifli-namecard/fix-dns.sh" || log "DNS step for card5 reported issues; continuing"
+  fi
+  "$HOME/dr-zulkifli-namecard/deploy-ssl.sh" --email "$CERTBOT_EMAIL"
+
   log "Deploying CBT -> director.cyber-beast.tech"
   "$HOME/CBTNamecard/deploy-ssl.sh" --email "$CERTBOT_EMAIL"
+
+  log "Fixing nginx default-server fallback"
+  if [[ -x "$HOME/AndyLanding/fix-nginx-default.sh" ]]; then
+    "$HOME/AndyLanding/fix-nginx-default.sh"
+  fi
 
   log "Verifying live pages..."
   for pair in \
     "card1.cyber-beast.tech|Stefano Qiu" \
     "card3.cyber-beast.tech|Golden Throne" \
+    "card5.cyber-beast.tech|Zulkifli Hasan" \
     "director.cyber-beast.tech|Ansgar Yeung"
   do
     domain="${pair%%|*}"
@@ -122,9 +135,10 @@ main() {
   done
 
   log "Bootstrap complete."
-  log "  Stefano: https://card1.cyber-beast.tech"
-  log "  Andy:    https://card3.cyber-beast.tech"
-  log "  CBT:     https://director.cyber-beast.tech"
+  log "  Stefano:   https://card1.cyber-beast.tech"
+  log "  Andy:      https://card3.cyber-beast.tech"
+  log "  Zulkifli:  https://card5.cyber-beast.tech"
+  log "  CBT:       https://director.cyber-beast.tech"
 }
 
 main "$@"
