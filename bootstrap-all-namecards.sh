@@ -5,7 +5,7 @@ set -euo pipefail
 # Run from Hostinger Browser Terminal (hPanel -> VPS -> Terminal) as root.
 #
 # Live URLs after success:
-#   https://card1.cyber-beast.tech      Stefano Qiu
+#   https://namecard.cyber-beast.tech   Stefano Qiu
 #   https://card3.cyber-beast.tech      Andy / Golden Throne
 #   https://card5.cyber-beast.tech      Dr. Zulkifli Hasan
 #   https://director.cyber-beast.tech   CBT / Ansgar Yeung
@@ -91,9 +91,9 @@ main() {
   chmod_scripts "$HOME/StephenNameCard/Stephen"
   chmod_scripts "$HOME/dr-zulkifli-namecard"
 
-  log "Deploying Stefano Qiu -> card1.cyber-beast.tech"
+  log "Deploying Stefano Qiu -> namecard.cyber-beast.tech"
   if [[ -x "$HOME/StephenNameCard/Stephen/fix-dns.sh" ]]; then
-    "$HOME/StephenNameCard/Stephen/fix-dns.sh" || log "DNS step for card1 reported issues; continuing"
+    "$HOME/StephenNameCard/Stephen/fix-dns.sh" || log "DNS step for namecard reported issues; continuing"
   fi
   "$HOME/StephenNameCard/Stephen/deploy-ssl.sh" --email "$CERTBOT_EMAIL"
 
@@ -119,7 +119,7 @@ main() {
 
   log "Verifying live pages..."
   for pair in \
-    "card1.cyber-beast.tech|Stefano Qiu" \
+    "namecard.cyber-beast.tech|Stefano Qiu" \
     "card3.cyber-beast.tech|Golden Throne" \
     "card5.cyber-beast.tech|Zulkifli Hasan" \
     "director.cyber-beast.tech|Ansgar Yeung"
@@ -135,7 +135,7 @@ main() {
   done
 
   log "Bootstrap complete."
-  log "  Stefano:   https://card1.cyber-beast.tech"
+  log "  Stefano:   https://namecard.cyber-beast.tech"
   log "  Andy:      https://card3.cyber-beast.tech"
   log "  Zulkifli:  https://card5.cyber-beast.tech"
   log "  CBT:       https://director.cyber-beast.tech"

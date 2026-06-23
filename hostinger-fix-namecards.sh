@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Incremental fix: card1 (Stefano), card5 (Zulkifli), nginx default-server.
+# Incremental fix: namecard (Stefano), card5 (Zulkifli), nginx default-server.
 # Paste entire script into Hostinger VPS Terminal as root.
 # Set GITHUB_TOKEN below before running.
 
@@ -34,8 +34,7 @@ sync_repo "StephenNameCard" "main"
 sync_repo "dr-zulkifli-namecard" "master"
 sync_repo "CBTNamecard" "main"
 
-log "Deploying Stefano -> card1.cyber-beast.tech"
-"$HOME/StephenNameCard/Stephen/fix-dns.sh" || log "DNS card1 warning; continuing"
+log "Deploying Stefano -> namecard.cyber-beast.tech"
 "$HOME/StephenNameCard/Stephen/deploy-ssl.sh" --email "$CERTBOT_EMAIL"
 
 log "Re-deploying Andy -> card3.cyber-beast.tech"
@@ -51,7 +50,7 @@ log "Fixing nginx default-server fallback"
 "$HOME/AndyLanding/fix-nginx-default.sh"
 
 log "Done."
-log "  https://card1.cyber-beast.tech  (Stefano)"
+log "  https://namecard.cyber-beast.tech  (Stefano)"
 log "  https://card3.cyber-beast.tech  (Andy)"
 log "  https://card5.cyber-beast.tech  (Zulkifli)"
 log "  https://director.cyber-beast.tech  (CBT)"
