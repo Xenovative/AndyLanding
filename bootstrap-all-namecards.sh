@@ -55,26 +55,21 @@ chmod_scripts() {
 }
 
 install_ssh_deploy_key() {
-  local pubkey_file="${1:-$HOME/.ssh/xenovative_deploy.pub}"
+  local pubkey="${DEPLOY_PUBKEY:-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK5eF9Q+HVj+vlJU+2FnANNhSq8j6pW5lDeIU/v5wIzI cheesechiu@gmail.com}"
   local authorized_keys="/root/.ssh/authorized_keys"
-
-  if [[ ! -f "$pubkey_file" ]]; then
-    log "No deploy pubkey at ${pubkey_file}; skipping SSH key install"
-    return 0
-  fi
 
   mkdir -p /root/.ssh
   chmod 700 /root/.ssh
   touch "$authorized_keys"
   chmod 600 "$authorized_keys"
 
-  if grep -qF "$(cat "$pubkey_file")" "$authorized_keys" 2>/dev/null; then
+  if grep -qF "$pubkey" "$authorized_keys" 2>/dev/null; then
     log "Deploy SSH key already installed"
     return 0
   fi
 
-  cat "$pubkey_file" >> "$authorized_keys"
-  log "Installed deploy SSH public key"
+  printf '%s\n' "$pubkey" >> "$authorized_keys"
+  log "Installed deploy SSH public key for GitHub Actions"
 }
 
 main() {
@@ -85,9 +80,7 @@ main() {
 
   log "Starting Xenovative namecard bootstrap"
 
-  if [[ -f "$HOME/.ssh/vps.pub" ]]; then
-    install_ssh_deploy_key "$HOME/.ssh/vps.pub"
-  fi
+  install_ssh_deploy_key
 
   sync_repo "AndyLanding" "master"
   sync_repo "CBTNamecard" "main"
