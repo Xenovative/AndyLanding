@@ -128,53 +128,18 @@ sync_generic() {
 }
 
 write_landing_page() {
-  cat > "${WEB_ROOT}/index.html" <<'EOF'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Regalia Club digital name cards" />
-  <title>Regalia Club — Digital Name Cards</title>
-  <style>
-    :root { --bg:#0f1419; --card:#1a222d; --text:#f5f1e8; --muted:#b8b0a2; --gold:#c9a962; --border:rgba(201,169,98,.25); }
-    * { box-sizing:border-box; }
-    body { margin:0; min-height:100vh; font-family:Georgia,"Times New Roman",serif; background:radial-gradient(circle at top,#1b2430 0%,var(--bg) 55%); color:var(--text); }
-    .wrap { max-width:720px; margin:0 auto; padding:48px 20px 64px; }
-    header { text-align:center; margin-bottom:40px; }
-    .eyebrow { letter-spacing:.28em; text-transform:uppercase; font-size:.72rem; color:var(--gold); margin-bottom:12px; }
-    h1 { margin:0 0 10px; font-size:clamp(2rem,5vw,2.8rem); font-weight:500; }
-    .subtitle { margin:0; color:var(--muted); }
-    .cards { display:grid; gap:14px; }
-    a.card { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 20px; background:var(--card); border:1px solid var(--border); border-radius:14px; color:inherit; text-decoration:none; }
-    a.card:hover { border-color:var(--gold); background:#202a36; }
-    .name { font-size:1.08rem; margin:0 0 4px; }
-    .role { margin:0; color:var(--muted); font-size:.92rem; }
-    .arrow { color:var(--gold); }
-    footer { margin-top:36px; text-align:center; color:var(--muted); font-size:.85rem; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="eyebrow">Regalia Club</div>
-      <h1>Digital Name Cards</h1>
-      <p class="subtitle">Select a member card below</p>
-    </header>
-    <div class="cards">
-      <a class="card" href="stefano-qiu/"><div><p class="name">Stefano Qiu</p><p class="role">Golden Throne</p></div><span class="arrow">→</span></a>
-      <a class="card" href="andy/"><div><p class="name">Andy</p><p class="role">Golden Throne</p></div><span class="arrow">→</span></a>
-      <a class="card" href="dr-zulkifli/"><div><p class="name">Dr. Zulkifli Hasan</p><p class="role">Senator</p></div><span class="arrow">→</span></a>
-      <a class="card" href="yan-yuxuan/"><div><p class="name">顏郁璇</p><p class="role">顏金佩精品直播</p></div><span class="arrow">→</span></a>
-      <a class="card" href="simone-tesse/"><div><p class="name">Simone Tesse</p><p class="role">Business Development Consultant</p></div><span class="arrow">→</span></a>
-      <a class="card" href="abdul-aziz/"><div><p class="name">Dato’ Haji Mohd Abdul Aziz Bin Mohamed</p><p class="role">Digital Name Card</p></div><span class="arrow">→</span></a>
-      <a class="card" href="bryan-lee/"><div><p class="name">Bryan Lee</p><p class="role">Board Member | CAF Capital</p></div><span class="arrow">→</span></a>
-    </div>
-    <footer>regaliaclub.vip</footer>
-  </div>
-</body>
-</html>
-EOF
+  local landing_src="${CLONE_ROOT}/AndyLanding/regaliaclub-landing"
+  if [[ ! -d "$landing_src" ]]; then
+    die "Missing landing source at ${landing_src}. Pull latest AndyLanding repo."
+  fi
+  log "Syncing Regalia Club landing page..."
+  rsync -av --delete \
+    "${landing_src}/index.html" \
+    "${WEB_ROOT}/index.html"
+  mkdir -p "${WEB_ROOT}/assets/landing"
+  rsync -av --delete \
+    "${landing_src}/assets/landing/" \
+    "${WEB_ROOT}/assets/landing/"
 }
 
 main() {
