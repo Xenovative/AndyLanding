@@ -127,19 +127,16 @@ sync_generic() {
   rsync "${args[@]}" "${src}/" "${dest}/"
 }
 
-write_landing_page() {
-  local landing_src="${CLONE_ROOT}/AndyLanding/regaliaclub-landing"
-  if [[ ! -d "$landing_src" ]]; then
-    die "Missing landing source at ${landing_src}. Pull latest AndyLanding repo."
-  fi
-  log "Syncing Regalia Club landing page..."
-  rsync -av --delete \
-    "${landing_src}/index.html" \
-    "${WEB_ROOT}/index.html"
-  mkdir -p "${WEB_ROOT}/assets/landing"
-  rsync -av --delete \
-    "${landing_src}/assets/landing/" \
-    "${WEB_ROOT}/assets/landing/"
+sync_landing_page() {
+  local src="${CLONE_ROOT}/AndyLanding/regaliaclub-landing"
+  [[ -d "$src" ]] || die "Missing ${src}. Pull latest Xenovative/AndyLanding."
+  log "Syncing PSD landing page and assets"
+  rsync -av \
+    "${src}/index.html" \
+    "${WEB_ROOT}/"
+  rsync -av \
+    "${src}/assets/" \
+    "${WEB_ROOT}/assets/"
 }
 
 main() {
@@ -161,7 +158,7 @@ main() {
   sync_generic "${CLONE_ROOT}/haji-m-abdul-aziz-namecard" "${WEB_ROOT}/abdul-aziz"
   sync_generic "${CLONE_ROOT}/bryan-lee-namecard" "${WEB_ROOT}/bryan-lee"
 
-  write_landing_page
+  sync_landing_page
 
   log "Done. Test these URLs:"
   log "  https://${DOMAIN}/"
