@@ -3,25 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Regalia Club — 24Kt NFC Business Cards for VIP members only." />
+  <meta name="description" content="24Kt NFC Business Cards for VIP members only." />
   <meta name="theme-color" content="#050505" />
-  <title>Regalia Club — 24Kt NFC Business Card | VIP Members</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <title>24Kt NFC Business Card | VIP Members</title>
   <style>
     :root {
       --bg: #050505;
-      --gold: #c9a24a;
       --gold-light: #e8cc7a;
-      --gold-muted: rgba(201, 162, 74, 0.55);
-      --text: #f5f1e8;
-      --text-muted: rgba(245, 241, 232, 0.72);
       --panel-border: rgba(201, 162, 74, 0.18);
-      --mockup-ratio: 803 / 1024;
-      --vip-ratio: 803 / 387;
-      --mobile1-ratio: 803 / 305;
-      --mobile2-ratio: 803 / 332;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -30,8 +19,6 @@
       margin: 0;
       padding: 0;
       background: var(--bg);
-      color: var(--text);
-      font-family: Inter, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -45,9 +32,8 @@
       min-height: 100vh;
     }
 
-    /* ── PSD mockup section ── */
     .hero {
-      background: radial-gradient(circle at 50% 0%, #151515 0%, var(--bg) 55%);
+      background: var(--bg);
       padding: 0;
     }
 
@@ -55,7 +41,7 @@
       display: none;
       max-width: 1280px;
       margin: 0 auto;
-      padding: 24px 20px 0;
+      padding: 0;
     }
 
     .mockup-frame {
@@ -64,10 +50,7 @@
       max-width: 1024px;
       margin: 0 auto;
       aspect-ratio: 1024 / 803;
-      border: 1px solid var(--panel-border);
-      border-radius: 4px;
       overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
     }
 
     .mockup-frame picture,
@@ -89,26 +72,10 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .mockup-mobile .panel:last-child {
-      border-bottom: none;
     }
 
     .mockup-mobile .panel-vip {
       aspect-ratio: 387 / 803;
-    }
-
-    .mockup-mobile .panel-mobile-1,
-    .mockup-mobile .panel-mobile-2 {
-      cursor: pointer;
-      transition: filter 0.2s ease;
-    }
-
-    .mockup-mobile .panel-mobile-1:hover,
-    .mockup-mobile .panel-mobile-2:hover {
-      filter: brightness(1.04);
     }
 
     .hotspot {
@@ -125,7 +92,6 @@
       outline-offset: 2px;
     }
 
-    /* Contact — full mockup coords (230,692,571,710) / 1024×803 */
     .hotspot-contact-full {
       left: 22.46%;
       top: 86.18%;
@@ -133,7 +99,6 @@
       height: 2.40%;
     }
 
-    /* Contact — VIP panel coords on mobile stack */
     .hotspot-contact-vip {
       left: 59.43%;
       top: 86.18%;
@@ -153,115 +118,15 @@
       border: 0;
     }
 
-    /* ── Member directory ── */
-    .members {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 48px 20px 72px;
-    }
-
-    .members-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .members-eyebrow {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      color: var(--gold);
-      margin: 0 0 10px;
-    }
-
-    .members-title {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      font-weight: 600;
-      margin: 0 0 8px;
-      color: var(--gold-light);
-    }
-
-    .members-sub {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    .member-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .member-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 18px;
-      border: 1px solid var(--panel-border);
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(26, 22, 14, 0.9), rgba(10, 10, 10, 0.95));
-      color: inherit;
-      text-decoration: none;
-      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
-    }
-
-    .member-link:hover {
-      border-color: var(--gold-muted);
-      transform: translateY(-1px);
-      background: linear-gradient(135deg, rgba(38, 32, 18, 0.95), rgba(14, 14, 14, 0.98));
-    }
-
-    .member-name {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin: 0 0 3px;
-      color: var(--text);
-    }
-
-    .member-role {
-      margin: 0;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .member-arrow {
-      color: var(--gold);
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    .site-footer {
-      text-align: center;
-      padding: 0 20px 40px;
-      color: var(--text-muted);
-      font-size: 0.82rem;
-    }
-
-    .site-footer a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-
     @media (min-width: 900px) {
       .mockup-desktop { display: block; }
       .mockup-mobile { display: none; }
-      .members { padding-top: 56px; }
-    }
-
-    @media (max-width: 899px) {
-      .hero {
-        padding-top: 0;
-      }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <section class="hero" aria-label="Regalia Club VIP presentation">
-      <!-- Desktop: full PSD mockup (exact 1024×803 layout) -->
+    <section class="hero" aria-label="24Kt NFC Business Card VIP presentation">
       <div class="mockup-desktop">
         <div class="mockup-frame">
           <picture>
@@ -271,7 +136,7 @@
             />
             <img
               src="assets/vip-landing/full-mockup.png"
-              alt="24Kt NFC Business Card for VIP members — Regalia Club presentation"
+              alt="24Kt NFC Business Card for VIP members only"
               width="1024"
               height="803"
               fetchpriority="high"
@@ -287,7 +152,6 @@
         </div>
       </div>
 
-      <!-- Mobile: stacked PSD panels -->
       <div class="mockup-mobile">
         <div class="panel panel-vip">
           <picture>
@@ -312,7 +176,7 @@
           </a>
         </div>
 
-        <a class="panel panel-mobile-1" href="andy/" aria-label="View Andy Wan namecard example">
+        <div class="panel panel-mobile-1">
           <picture>
             <source
               type="image/webp"
@@ -320,15 +184,15 @@
             />
             <img
               src="assets/vip-landing/panel-mobile-1.png"
-              alt="VIP member digital namecard example — profile and business focus"
+              alt=""
               width="305"
               height="803"
               loading="lazy"
             />
           </picture>
-        </a>
+        </div>
 
-        <a class="panel panel-mobile-2" href="andy/" aria-label="View Andy Wan namecard example">
+        <div class="panel panel-mobile-2">
           <picture>
             <source
               type="image/webp"
@@ -336,89 +200,15 @@
             />
             <img
               src="assets/vip-landing/panel-mobile-2.png"
-              alt="VIP member digital namecard example — products and contact"
+              alt=""
               width="332"
               height="803"
               loading="lazy"
             />
           </picture>
-        </a>
+        </div>
       </div>
     </section>
-
-    <section class="members" aria-labelledby="members-title">
-      <div class="members-header">
-        <p class="members-eyebrow">Regalia Club</p>
-        <h1 class="members-title" id="members-title">VIP Member Name Cards</h1>
-        <p class="members-sub">Select a member to open their digital NFC name card</p>
-      </div>
-
-      <div class="member-grid">
-        <a class="member-link" href="stefano-qiu/">
-          <div>
-            <p class="member-name">Stefano Qiu</p>
-            <p class="member-role">Golden Throne</p>
-          </div>
-          <span class="member-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="member-link" href="andy/">
-          <div>
-            <p class="member-name">Andy Wan</p>
-            <p class="member-role">Golden Throne Official</p>
-          </div>
-          <span class="member-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="member-link" href="dr-zulkifli/">
-          <div>
-            <p class="member-name">Dr. Zulkifli Hasan</p>
-            <p class="member-role">Senator</p>
-          </div>
-          <span class="member-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="member-link" href="yan-yuxuan/">
-          <div>
-            <p class="member-name">顏郁璇</p>
-            <p class="member-role">顏金佩精品直播</p>
-          </div>
-          <span class="member-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="member-link" href="simone-tesse/">
-          <div>
-            <p class="member-name">Simone Tesse</p>
-            <p class="member-role">Business Development Consultant</p>
-          </div>
-          <span class="member-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="member-link" href="abdul-aziz/">
-          <div>
-            <p class="member-name">Dato’ Haji Mohd Abdul Aziz Bin Mohamed</p>
-            <p class="member-role">Digital Name Card</p>
-          </div>
-          <span class="member-arrow" aria-hidden="true">→</span>
-        </a>
-
-        <a class="member-link" href="bryan-lee/">
-          <div>
-            <p class="member-name">Bryan Lee</p>
-            <p class="member-role">Board Member | CAF Capital</p>
-          </div>
-          <span class="member-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <p>
-        Contact:
-        <a href="mailto:andyw@goldenthroneofficial.com">andyw@goldenthroneofficial.com</a>
-        · regaliaclub.vip
-      </p>
-    </footer>
   </div>
 </body>
 </html>
