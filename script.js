@@ -1,5 +1,32 @@
 const revealElements = document.querySelectorAll('.reveal');
 
+// #region agent log
+(() => {
+  const heroBtn = document.querySelector('.hero-save-top');
+  const portraitBtn = document.querySelector('.portrait-card > .btn-save');
+  const heroStyle = heroBtn ? window.getComputedStyle(heroBtn) : null;
+  fetch('http://127.0.0.1:7501/ingest/13cfea48-8ef8-4597-8481-d17014fbf4be', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '783f56' },
+    body: JSON.stringify({
+      sessionId: '783f56',
+      runId: 'pre-fix',
+      hypothesisId: 'H1',
+      location: 'AndyLanding/script.js:init',
+      message: 'Andy save button runtime',
+      data: {
+        viewportWidth: window.innerWidth,
+        heroBtnTop: heroBtn?.getBoundingClientRect()?.top ?? null,
+        heroBtnDisplay: heroStyle?.display ?? null,
+        portraitBtnTop: portraitBtn?.getBoundingClientRect()?.top ?? null,
+        heroBtnBg: heroStyle?.backgroundImage ?? null,
+      },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+})();
+// #endregion
+
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
