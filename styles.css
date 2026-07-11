@@ -336,8 +336,8 @@ img {
   width: 100%;
   margin-top: 20px;
   padding: 16px 24px;
-  background: linear-gradient(180deg, #ffd86a 0%, #ffcc4f 55%, #e8b030 100%);
-  color: #1a1200;
+  background: linear-gradient(180deg, #ffd86a 0%, #ffcc4f 55%, #e8b030 100%) !important;
+  color: #1a1200 !important;
   font-family: "Inter", sans-serif;
   font-size: 0.92rem;
   font-weight: 700;
