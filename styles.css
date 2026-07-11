@@ -365,7 +365,17 @@ img {
 
 .hero-save-top {
   display: none;
-  margin: 18px 0 8px;
+  margin: 0 18px 16px;
+}
+
+@media (max-width: 640px) {
+  .hero-save-top {
+    display: block;
+  }
+
+  .portrait-card > .btn-save {
+    display: none;
+  }
 }
 
 .highlight-panel {
@@ -752,35 +762,6 @@ img {
   .hero-grid {
     display: flex;
     flex-direction: column;
-  }
-
-  .hero-save-top {
-    display: block;
-    order: 1;
-  }
-
-  .hero-copy h1 {
-    order: 0;
-  }
-
-  .hero-copy .eyebrow {
-    order: 0;
-  }
-
-  .hero-role {
-    order: 2;
-  }
-
-  .hero-description {
-    order: 3;
-  }
-
-  .hero-actions {
-    order: 4;
-  }
-
-  .portrait-card > .btn-save {
-    display: none;
   }
 
   .hero-copy {
