@@ -363,6 +363,11 @@ img {
   transform: translateY(0);
 }
 
+.hero-save-top {
+  display: none;
+  margin: 18px 0 8px;
+}
+
 .highlight-panel {
   padding: 28px;
 }
@@ -747,6 +752,35 @@ img {
   .hero-grid {
     display: flex;
     flex-direction: column;
+  }
+
+  .hero-save-top {
+    display: block;
+    order: 1;
+  }
+
+  .hero-copy h1 {
+    order: 0;
+  }
+
+  .hero-copy .eyebrow {
+    order: 0;
+  }
+
+  .hero-role {
+    order: 2;
+  }
+
+  .hero-description {
+    order: 3;
+  }
+
+  .hero-actions {
+    order: 4;
+  }
+
+  .portrait-card > .btn-save {
+    display: none;
   }
 
   .hero-copy {
